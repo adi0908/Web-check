@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Vargi-Bots</title>
 	
 	<meta charset="UTF-8">
-	
+
     <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
@@ -14,8 +14,8 @@
 	
 	<!-- Font APIs -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Goldman|Nunito|Raleway">
-
-  	<script
+  	
+	<script
     src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""
@@ -27,173 +27,58 @@
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<style>
-		* {box-sizing: border-box;}
-
-		.topnav .search-container {
-		  float: right;
-		}
-
-		.topnav input[type=text] {
-		  padding: 6px;
-		  margin-top: 8px;
-		  font-size: 17px;
-		  border: none;
-		}
-
-		.topnav .search-container button {
-		  float: right;
-		  padding: 6px 15px;
-		  margin-top: 8px;
-		  margin-right: 16px;
-		  background: #ddd;
-		  font-size: 17px;
-		  border: none;
-		  cursor: pointer;
-		}
-
-		.topnav .search-container button:hover {
-		  background: #ccc;
-		}
-
-		@media screen and (max-width: 60px) {
-		  .topnav .search-container {
-			float: none;
-		  }
-		  .topnav a, .topnav input[type=text], .topnav .search-container button {
-			float: none;
-			display: block;
-			text-align: left;
-			width: 100%;
-			margin: 0;
-			padding: 14px;
-		  }
-		  .topnav input[type=text] {
-			border: 1px solid #ccc;  
-		  }
-		}
-		
-	</style>
-	
 </head>
-
 <header>
     <center>
-        <div id="eyantraLogo" class="topnav">
+        <div id="eyantraLogo">
             <!-- eyantra logo -->
-            <img src="https://eyic.e-yantra.org/img/eYantra_logo_whitetext.png" alt="e_yantra_logo" width="290" height="60" style="margin-top:10px; margin-left:280px;">
-    
-				<div class="search-container">
-					<input type="text" placeholder="Search your Order ID...." name="search">
-						<button type="submit">
-							<i class="fa fa-search"></i>
-						</button>
-				</div>
-		</div>
-	</center>
+            <img src="https://eyic.e-yantra.org/img/eYantra_logo_whitetext.png" alt="e_yantra_logo" width="290" height="60" style="margin-top:10px;"><br>
+        </div>
+    </center>
 </header>
 
 <!-- Background Image -->
 <body background='https://images.squarespace-cdn.com/content/v1/59394df0bf629afcc7dd4bed/1503010573168-1QPOBHEAAWP6SN9I6WI6/ke17ZwdGBToddI8pDm48kB2qThcsGo8KlX0xCX5xL817gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UR_7C_D3iolpcC0vupphd7yaHSDrJLrfe7gK9DncrfuhhbgHIlOZnMbp8Juz_4NGyw/CircuitBackground_DARK.jpg'>
-		<style>
-			div.a {
-			  text-align: center;
-			}
-
-			div.b {
-			  text-align: left;
-			}
-
-			div.c {
-			  text-align: right;
-			} 
-
-			div.d {
-			  text-align: justify;
-			} 
-			
-			.row {
-			  display: flex;
-			}
-
-			.column {
-			  flex: 100%;
-			  padding: 50px;
-			}
-
-		</style>
-		
+    <center>
 		<!-- Setting Heading -->
-		<center>
-			<h1 style="color:white; font-family:Bitter;">VB#0853 Warehouse Dashboard</h1>
-			<hr style="height:8px;border-width:5;color:black;background-color:teal">
-		</center>
+		<h1 style="color:white;">VB#0853 Warehouse Dashboard</h1>
+		<hr style="height:8px;border-width:5;color:black;background-color:teal">
 		
+		<!-- Setting Map Heading -->
+		<h2 style="color:lightsteelblue; font-family: 'Goldman', sans-serif; font-size: 40px;">
+		
+			<b>
+				<br>
+				Live Order Tracker
+			</b>
+		</h2>
+		
+		<!-- Setting Map -->
+		<div class='b' id="map" style="width: 80%; height: 475px; border: 20px outset darkslategray;"></div>
 		<br><br>
 		
-		<div class="row">
+		<!-- Setting Chart Heading -->
+		<h2 style="color:lightsteelblue; font-family: 'Goldman', sans-serif; font-size: 40px;">
+			<b>
+				<br>
+				Shipping Time Graph
+			</b>
+		</h2>
 		
-			<!--Setting Map-->
-			<div class="column">
-				<div class='b' id="map" style="width: 125%; height: 475px; border: 20px outset darkslategray;"></div>
-			</div>
-			<div class="column">
-				<div class='c'>
-				
-					<!-- Setting Map Heading -->
-					<h2 style="color:lightsteelblue; font-family: 'Goldman', sans-serif; font-size: 80px; test-align: right;">
-						<b>
-						<div class='b'>
-							<div class='a'>
-								<br>
-								&nbsp 
-								Live Order
-								<br>
-								Tracker
-							</div>
-						</div>
-						</b>
-					</h2>
-				</div>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="column">
-			
-				<!-- Setting Chart Heading -->
-				<h2 style="color:lightsteelblue; font-family: 'Goldman', sans-serif; font-size: 80px;">
-					<b>
-						Shipping Time Graph
-					</b>
-				</h2>
-			</div>
-			<div class="column">
-			
-				<!-- Setting Chart -->
-				<div class='c'>
-					<b>
-						<div class='b'>
-							<div class='a'>
-								<div id="column_chart" style="width: 800px; height: 400px; border: 20px outset darkslategray;"></div>
-							</div>
-						</div>
-					</b>
-				</div>
-			</div>
-		</div>
-		
-		<center>
+		<!-- Setting Chart -->
+		<div id="column_chart" style="width: 80%; height: 400px; border: 20px outset darkslategray;"></div>
+		<br><br>
 		
 		<!-- Setting Table Heading -->
-		<h2 style="color:lightsteelblue; font-family: 'Goldman', sans-serif; font-size: 80px;">
+		<h2 style="color:lightsteelblue; font-family: 'Goldman', sans-serif; font-size: 40px;">
 			<b>
+				<br>
 				Order Table
 			</b>
 		</h2>
 		
 			<!-- Setting Table -->
-			<table id="table1" border='20'style="width: 88%; height: 180px; border: 20px outset darkslategray;">
+			<table id="table1" border='20'style="width: 83%; height: 180px; border: 20px outset darkslategray;">
 				<tr style="font-family: 'Raleway'; color:gold; font-size: 15px; background-color:Teal;">
                 	<th>Order ID</th>
                 	<th>Item</th>
@@ -203,18 +88,16 @@
 					<th>Order Date and Time</th>
 					<th>Dispatch Date and Time</th>
 					<th>Shipping Date and Time</th>
-					<th>Time Taken</th>
+					<th>Time Taken (secs)</th>
 				</tr>
             <tbody id="tableContent" style="font-family: 'Nunito'; text-align:center; font-size: 14px;">
             </tbody>
 			</table>
-		</center>
-		
-		<br><br><br><br>
-		
+	</center>
+	<br><br><br><br>
+	
 		<!-- End Line -->
-        <hr style="height:3px; border-width:5; color:yellow; background-color:red">
-		
+        <hr style="height:3px;border-width:5;color:yellow;background-color:red">
 </body>
 
 <script type="text/javascript">

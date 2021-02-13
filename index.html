@@ -81,7 +81,9 @@
     <center>
         <div id="eyantraLogo" class="topnav">
             <!-- eyantra logo -->
+			<a href="https://eyrc-vb-0853.github.io/VB-0853_Warehouse_Dashboard/">
             <img src="https://eyic.e-yantra.org/img/eYantra_logo_whitetext.png" alt="e_yantra_logo" width="290" height="60" style="margin-top:10px; margin-left:280px;">
+			</a>
 				<div class="search-container">
 					<input type="text" placeholder="Search your Order ID...." name="search">
 						<button type="submit">
@@ -213,7 +215,7 @@
 		<br><br><br><br>
 		
 		<!-- End Line -->
-        <hr style="height:3px; border-width:5; color:yellow; background-color:red">
+        <hr style="height:3px; border-width:5; color:red; background-color:red">
 		
 </body>
 
@@ -336,7 +338,7 @@
 		  // Converting Json Object to JavaScript Array
 		  for(var j in jsonDataObject)
 		  {
-			  graph_arr.push([jsonDataObject[j].OderID,jsonDataObject[j].TimeTaken, bar_color[j]]);
+			  graph_arr.push([jsonDataObject[j].OderID, jsonDataObject[j].TimeTaken, bar_color[j], jsonDataObject[j].TimeTaken]);
 		  }
 		  
 		  var graphArray_Final = google.visualization.arrayToDataTable(graph_arr);
@@ -365,8 +367,9 @@
 				trHTML += '<tr style="color:white;"><td>' + jsonDataObject[i].OderID + 
 						  '</td><td>' + jsonDataObject[i].Item + 
 						  '</td><td>' + jsonDataObject[i].Priority + 
-						  '</td><td>' + jsonDataObject[i].Quantity + 
-						  '</td><td>' + jsonDataObject[i].City +
+						  '</td><td>' + jsonDataObject[i].City + 
+						  '</td><td>' + jsonDataObject[i].Dispatched +
+						  '</td><td>' + jsonDataObject[i].Shipped +
 						  '</td><td>' + jsonDataObject[i].Order +
 						  '</td><td>' + jsonDataObject[i].Dispatch +
 						  '</td><td>' + jsonDataObject[i].Shipping +
@@ -393,7 +396,7 @@
 	
 		var jsonDataObject = [];
 		
-		var graph_arr = [['Order ID', 'Time Taken', { role: 'style' }]];
+		var graph_arr = [['Order ID', 'Time Taken', { role: 'style' } , { role: 'annotation' }]];
 		var bar_color = [];
 		
 		var trHTML = '';
@@ -403,6 +406,7 @@
 			for (var i = 0; i < data.feed.entry.length; ++i) 
 			{
 				var status;
+				
 				if(data.feed.entry[i].gsx$orderdispatched.$t == 'No')
 					{
 						status = "Not Dispatched";
@@ -422,15 +426,16 @@
 					"Item" : data.feed.entry[i].gsx$item.$t,
 					"Latitude": parseFloat(data.feed.entry[i].gsx$latitude.$t),
 					"Longitude": parseFloat(data.feed.entry[i].gsx$longitude.$t),
-					"Order": data.feed.entry[i].gsx$orderdateandtime.$t,
-					"Dispatch": data.feed.entry[i].gsx$dispatchdateandtime.$t,
-					"Shipping": data.feed.entry[i].gsx$shippingdateandtime.$t,
+					"Order": data.feed.entry[i].gsx$ordertime.$t,
+					"Dispatch": data.feed.entry[i].gsx$dispatchtime.$t,
+					"Shipping": data.feed.entry[i].gsx$shippingtime.$t,
 					"TimeTaken": parseFloat(data.feed.entry[i].gsx$timetaken.$t),
 					"Priority": data.feed.entry[i].gsx$priority.$t,
 					"Quantity": data.feed.entry[i].gsx$quantity.$t,
+					"Dispatched": data.feed.entry[i].gsx$orderdispatched.$t,
+					"Shipped": data.feed.entry[i].gsx$ordershipped.$t,
 					"Status": status
-				   
-				};
+					};
 				
 				jsonDataObject.push(json_data);
 				

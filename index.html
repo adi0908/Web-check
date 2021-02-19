@@ -77,8 +77,11 @@
 	
 </head>
 
+<div  style="border: 15px solid #9c8a87; resize: both; overflow: auto">
+
 <header>
     <center>
+	<div style="background-image: linear-gradient(to bottom right, #9c78ff, #f796ff);">
         <div id="eyantraLogo" class="topnav">
             <!-- eyantra logo -->
 			<a href="https://eyrc-vb-0853.github.io/VB-0853_Warehouse_Dashboard/">
@@ -91,6 +94,10 @@
 						</button>
 				</div>
 		</div>
+		<!-- Setting Heading -->
+			<h1 style="color:mustard;">VB#0853 Warehouse Dashboard</h1>
+			<br>
+	</div>
 	</center>
 </header>
 
@@ -124,25 +131,19 @@
 
 		</style>
 		
-		<!-- Setting Heading -->
-		<center>
-			<h1 style="color:white; font-family:Bitter;">VB#0853 Warehouse Dashboard</h1>
-			<hr style="height:8px;border- 2000px ;color:black;background-color:teal">
-		</center>
-		
-		<br><br>
+		<br>
 		
 		<div class="row">
 		
 			<!--Setting Map-->
 			<div class="column">
-				<div class='b' id="map" style="width: 750px; height: 475px; border: 20px outset darkslategray;"></div>
+				<div class='b' id="map" style="width: 750px; height: 475px; border: 20px outset #42a293;"></div>
 			</div>
 			<div class="column">
 				<div class='c'>
 				
 					<!-- Setting Map Heading -->
-					<h2 style="color:lightsteelblue; font-family: 'Goldman', sans-serif; font-size: 80px; test-align: right;">
+					<h2 style="color: #c9ba78; font-family: 'Goldman', sans-serif; font-size: 80px; test-align: right;">
 						<b>
 						<div class='b'>
 							<div class='a'>
@@ -163,7 +164,7 @@
 			<div class="column">
 			
 				<!-- Setting Chart Heading -->
-				<h2 style="color:lightsteelblue; font-family: 'Goldman', sans-serif; font-size: 80px;">
+				<h2 style="color: #c9ba78; font-family: 'Goldman', sans-serif; font-size: 80px;">
 					<b>
 						<br>
 						Shipping
@@ -178,7 +179,7 @@
 				<div class='a'>
 					<b>
 						<div class='b'>
-							<div id="column_chart" style="width: 750px; height: 475px; border: 20px outset darkslategray;"></div>
+							<div id="column_chart" style="width: 750px; height: 475px; border: 20px outset #42a293;"></div>
 						</div>
 					</b>
 				</div>
@@ -188,24 +189,25 @@
 		<center>
 		
 		<!-- Setting Table Heading -->
-		<h2 style="color:lightsteelblue; font-family: 'Goldman', sans-serif; font-size: 80px;">
+		<h2 style="color: #c9ba78; font-family: 'Goldman', sans-serif; font-size: 80px;">
 			<b>
 				Order Table
 			</b>
 		</h2>
 		
 			<!-- Setting Table -->
-			<table id="table1" border='20'style="width: 88%; height: 180px; border: 20px outset darkslategray;">
-				<tr style="font-family: 'Raleway'; color:gold; font-size: 15px; background-color:Teal;">
+			<table id="table1" border='20'style="width: 88%; height: 180px; border: 20px outset #42a293;">
+				<tr style="font-family: 'Raleway'; color:gold; font-size: 15px; background-color: #425d61;">
                 	<th>Order ID</th>
                 	<th>Item</th>
                 	<th>Priority</th>
-                	<th>Quantity</th>
                 	<th>City</th>
+                	<th>Dispatched</th>
+					<th>Shipped</th>
 					<th>Order Date and Time</th>
 					<th>Dispatch Date and Time</th>
 					<th>Shipping Date and Time</th>
-					<th>Time Taken</th>
+					<th>Time Taken (secs)</th>
 				</tr>
             <tbody id="tableContent" style="font-family: 'Nunito'; text-align:center; font-size: 14px;">
             </tbody>
@@ -396,7 +398,7 @@
 	
 		var jsonDataObject = [];
 		
-		var graph_arr = [['Order ID', 'Time Taken', { role: 'style' } , { role: 'annotation' }]];
+		var graph_arr = [['Order ID', 'Time Taken', { role: 'style' } , { role: 'annotation' } ]];
 		var bar_color = [];
 		
 		var trHTML = '';

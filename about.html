@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vargi-Bots</title>
+	
+	<meta charset="UTF-8">
+	
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""
+  	/>
+	
+	<!-- Font APIs -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Goldman|Nunito|Raleway">
+
+  	<script
+    src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""
+  	></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<style>
+		/* styling navlist */ 
+		#navlist a { 
+			float:left; 
+			display: block; 
+			color: #f2f2f2; 
+			text-align: center; 
+			padding: 12px; 
+			text-decoration: none; 
+			font-size: 15px; 
+		}
+	  
+		/* hover effect of navlist anchor element */ 
+		#navlist a:hover { 
+			background-color: #ddd; 
+			color: black; 
+		} 
+		
+		/* hover effect of logo anchor element */ 
+		.navlist-centered a {
+			float: none;
+			position: absolute;
+			top: 10%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+						  
+		/* styling search bar */ 
+		.search input[type=text]{ 
+			width:300px; 
+			height:30px; 
+			border-radius:25px; 
+			border: none; 
+		} 
+			  
+		.search{ 
+			float:right; 
+			margin:7px; 
+		} 
+			  
+		.search button{ 
+			background-color: transparent; 
+			color: white; 
+			float: right; 
+			padding: 9px 10px; 
+			margin-right: 16px; 
+			font-size: 16px; 
+			border: none; 
+			cursor: pointer; 
+		}  
+		
+	</style>
+	
+</head>
+
+<div  style="border: 15px solid #9c8a87; resize: both; overflow: auto;">
+
+<header>
+	<div style="background-image: linear-gradient(to bottom right, #9c78ff, #f796ff); resize: both; overflow: auto">	
+			<br>
+			<!-- Navbar items -->
+			<div id="navlist"> 
+				<a href="index.html" style="font-size:15px; font-family: goldman">Home</a> 
+				<a href="products.html" style="font-size:15px; font-family: goldman">Our Products</a>
+				<a href="about.html" style="font-size:15px; font-family: goldman">About Us</a> 
+				<a href="contact.html" style="font-size:15px; font-family: goldman">Contact Us</a>
+				
+				<div class="navlist-centered">
+				<!-- eyantra logo -->
+				<a href="index.html">
+					<img src="https://eyic.e-yantra.org/img/eYantra_logo_whitetext.png" alt="e_yantra_logo" width="290" height="60" >
+				</a>
+				</div>
+				
+				<!-- seach bar right align -->
+				<div class="search"> 
+					<form action="#"> 
+						<input type="text" placeholder=" Search Order ID" name="search"> 
+						<button> 
+							<i class="fa fa-search"
+								style="font-size: 18px;"> 
+							</i> 
+						</button> 
+					</form> 
+				</div> 
+			 
+			</div>
+		<br><br><br><br><br>
+		<center>
+		<!-- Setting Heading -->
+			<h1 style="color:mustard;">VB#0853 Warehouse Dashboard</h1>
+		</center>
+		<!-- Setting Current TIme -->
+		<p style="float:right; font-family: Goldman;"><b>Time Now: </b><span id='date-time'></span>.</p>
+	</div>
+</header>
+
+<!-- Background Image -->
+<body background='https://images.squarespace-cdn.com/content/v1/59394df0bf629afcc7dd4bed/1503010573168-1QPOBHEAAWP6SN9I6WI6/ke17ZwdGBToddI8pDm48kB2qThcsGo8KlX0xCX5xL817gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UR_7C_D3iolpcC0vupphd7yaHSDrJLrfe7gK9DncrfuhhbgHIlOZnMbp8Juz_4NGyw/CircuitBackground_DARK.jpg'>
+		
+		<br>
+		
+		<!-- Setting Table Heading -->
+		<h2 style="color: #c9ba78; font-family: 'Goldman', sans-serif; font-size: 60px; margin-left:80px;">
+			<b>
+				About Us
+			</b>
+		</h2>
+		
+		<div style = 'text-align: justify; color: ivory; margin-left: 100px; margin-right: 50px; margin-bottom: 150px; margin-top: 50px; font-family: Nunito; font-size: 20px;'>
+			<p>
+				e-Yantra Robotics Competition is about sensitizing students to look into problems around them to devise solutions as engineers. In the previous versions of the competition, we’ve encouraged young engineers to look into issues in domains such as: Agriculture, Urban Services, Warehouse Automation, Space Exploration, Jungle Safari, Disaster Management and so on.
+				<br><br>
+				We are Team eYRC#VB#853. We are participating in Vargi Bots Theme at the eYantra Robotics Competition.
+			</p>
+		</div>
+		
+</body>
+<script type="text/javascript">
+    /////////////Ajax Requests////////////
+    $(document).ready(function(){
+		//Fetch initial time
+		time();
+		
+		//Fetch time every second
+		setInterval(time, 1000);
+    });
+	//Function for Current Time
+	function time()
+	{
+		var dt = new Date();
+		document.getElementById('date-time').innerHTML=dt;
+	}
+</script>
+</html>

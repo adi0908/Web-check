@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vargi-Bots</title>
+	
+	<meta charset="UTF-8">
+	
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""
+  	/>
+	
+	<!-- Font APIs -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Goldman|Nunito|Raleway">
+
+  	<script
+    src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""
+  	></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<style>
+		/* styling navlist */ 
+		#navlist a { 
+			float:left; 
+			display: block; 
+			color: #f2f2f2; 
+			text-align: center; 
+			padding: 12px; 
+			text-decoration: none; 
+			font-size: 15px; 
+		}
+	  
+		/* hover effect of navlist anchor element */ 
+		#navlist a:hover { 
+			background-color: #ddd; 
+			color: black; 
+		} 
+		
+		/* hover effect of logo anchor element */ 
+		.navlist-centered a {
+			float: none;
+			position: absolute;
+			top: 10%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+						  
+		/* styling search bar */ 
+		.search input[type=text]{ 
+			width:300px; 
+			height:30px; 
+			border-radius:25px; 
+			border: none; 
+		} 
+			  
+		.search{ 
+			float:right; 
+			margin:7px; 
+		} 
+			  
+		.search button{ 
+			background-color: transparent; 
+			color: white; 
+			float: right; 
+			padding: 9px 10px; 
+			margin-right: 16px; 
+			font-size: 16px; 
+			border: none; 
+			cursor: pointer; 
+		}  
+		
+	</style>
+	
+</head>
+
+<div  style="border: 15px solid #9c8a87; resize: both; overflow: auto;">
+
+<header>
+	<div style="background-image: linear-gradient(to bottom right, #9c78ff, #f796ff); resize: both; overflow: auto">	
+			<br>
+			<!-- Navbar items -->
+			<div id="navlist"> 
+				<a href="index.html" style="font-size:15px; font-family: goldman">Home</a> 
+				<a href="products.html" style="font-size:15px; font-family: goldman">Our Products</a>
+				<a href="about.html" style="font-size:15px; font-family: goldman">About Us</a> 
+				<a href="contact.html" style="font-size:15px; font-family: goldman">Contact Us</a>
+				
+				<div class="navlist-centered">
+				<!-- eyantra logo -->
+				<a href="index.html">
+					<img src="https://eyic.e-yantra.org/img/eYantra_logo_whitetext.png" alt="e_yantra_logo" width="290" height="60" >
+				</a>
+				</div>
+				
+				<!-- seach bar right align -->
+				<div class="search"> 
+					<form method="get" action="search.html"> 
+						<input type="text" placeholder=" Search Order ID" name="OrderID" id="OrderID"> 
+							<button type="button" onClick="search_input()"> 
+								<i class="fa fa-search"
+									style="font-size: 18px;"> 
+								</i> 
+							</button> 
+					</form> 
+				</div> 
+			 
+			</div>
+		<br><br><br><br><br>
+		<center>
+		<!-- Setting Heading -->
+			<h1 style="color:mustard;">VB#0853 Warehouse Dashboard</h1>
+		</center>
+		<!-- Setting Current TIme -->
+		<p style="float:right; font-family: Goldman;"><b>Time Now: </b><span id='date-time'></span></p>
+	</div>
+</header>
+
+<!-- Background Image -->
+<body background='https://images.squarespace-cdn.com/content/v1/59394df0bf629afcc7dd4bed/1503010573168-1QPOBHEAAWP6SN9I6WI6/ke17ZwdGBToddI8pDm48kB2qThcsGo8KlX0xCX5xL817gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UR_7C_D3iolpcC0vupphd7yaHSDrJLrfe7gK9DncrfuhhbgHIlOZnMbp8Juz_4NGyw/CircuitBackground_DARK.jpg'>
+		<style>
+			.row {
+			  display: flex;
+			}
+
+			.column {
+			  flex: 100%;
+			  padding: 50px;
+			}
+			
+			
+			th, td { display: block; }
+			
+			thead {
+			  float: left;   
+			}
+
+
+			thead th {
+			  display: block;
+			}
+
+			tbody {
+			  float: right;   
+			}
+
+		</style>
+		
+		<br>
+		
+		<!-- Setting Heading -->
+		<h2 style="color: #c9ba78; font-family: 'Goldman', sans-serif; font-size: 60px; margin-left:80px;">
+			<b>
+				Search Results
+			</b>
+		</h2>
+		
+		<center>
+			<h4 id = 'message' style = "font-family: 'Nunito'; color:red; font-size: 35px;"></h4>
+		</center>
+		
+		<div class="row">
+			<div class="column">
+				<table id="table1" border='10'style="width: auto; height: auto; border: 10px outset #42a293; margin-left: 130px;">
+						<thead>
+							<tr style="font-family: 'Raleway'; color:gold; font-size: 20px; background-color: #425d61; text-align: left;">
+								<th>Order ID &nbsp : </th>
+								<th>Item &nbsp : </th>
+								<th>Priority &nbsp : </th>
+								<th>City &nbsp : </th>
+								<th>Dispatched &nbsp : </th>
+								<th>Shipped &nbsp : </th>
+								<th>Order Date and Time &nbsp : </th>
+								<th>Dispatch Date and Time &nbsp : </th>
+								<th>Shipping Date and Time &nbsp : </th>
+								<th>Time Taken (secs) &nbsp : </th>
+							</tr>
+						</thead>
+					<tbody id="details" style="font-family: Nunito; text-align:left; font-size: 17.5px;">
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="column">
+				<!--Setting Map-->
+				<div id="map" style="width: 400px; height: 425px; border: 20px outset #42a293; float: right; margin-right: 100px"></div>
+			</div>
+			
+		</div>
+		<br><br><br><br>
+		
+</body>
+
+<script type="text/javascript">
+    /////////////Ajax Requests////////////
+    $(document).ready(function(){
+		// Fetch the initial data
+		work();
+		
+		// Fetch every 5 second
+		setInterval(work, 3000);
+		
+		//Fetch initial time
+		time();
+		
+		//Fetch time every second
+		setInterval(time, 1000);
+    });
+	
+	
+	//Creating Red Marker
+	var redIcon = new L.Icon({
+		 iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+		 shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		 iconSize: [25, 41],
+		 iconAnchor: [12, 41],
+		 popupAnchor: [1, -34],
+		 shadowSize: [41, 41]
+	});
+
+	//Creating Green Marker
+	var greenIcon = new L.Icon({
+		 iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+		 shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		 iconSize: [25, 41],
+		 iconAnchor: [12, 41],
+		 popupAnchor: [1, -34],
+		 shadowSize: [41, 41]
+	});
+
+	//Creating Yellow Marker
+	var yellowIcon = new L.Icon({
+		 iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
+		 shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		 iconSize: [25, 41],
+		 iconAnchor: [12, 41],
+		 popupAnchor: [1, -34],
+		 shadowSize: [41, 41]
+	});
+	
+	var input = '';
+	
+	window.onload = function () 
+	{
+		var url = document.location.href,
+			params = url.split('?')[1].split('&'),
+			data = {}, tmp;
+		for (var i = 0, l = params.length; i < l; i++) {
+			 tmp = params[i].split('=');
+			 if (tmp === '%20'){tmp = ' ';}
+			 data[tmp[0]] = tmp[1];
+		}
+		input = decodeURIComponent(data.OrderID);
+	}
+	
+	//Function created for map related tasks
+	function for_map(container, map, jsonData)
+	{
+		
+		//Checking and allocating appropriate marker
+		var presentIcon;
+        if(jsonData.Status == 'Not Dispatched')
+		{
+			presentIcon = redIcon;
+        }
+		else if(jsonData.Status == 'Dispatched')
+		{
+			presentIcon = yellowIcon;
+        }
+		else if(jsonData.Status == 'Shipped')
+		{
+			presentIcon = greenIcon;
+        }
+				
+		//Placing marker on map
+        var marker = L.marker(L.latLng(parseFloat(jsonData.Latitude), parseFloat(jsonData.Longitude)),{icon : presentIcon});
+        marker.bindPopup(jsonData.City, {
+                autoClose: false });
+        map.addLayer(marker);
+        marker.on('click', onClick_Marker);
+				
+        //Attach the corresponding JSON data to your marker:
+        marker.myJsonData =jsonData;
+				
+		function onClick_Marker(e) 
+		{
+			//To show details of order as popup
+			var marker = e.target;
+			popup = L.popup()
+					.setLatLng(marker.getLatLng())
+					.setContent("<b> &nbsp &nbsp &nbsp &nbsp " + marker.myJsonData.City +"</b>"+ "<b><br>Order ID: </b>" + marker.myJsonData.OderID + "<b><br>Item: </b>" + marker.myJsonData.Item + "<b><br>Status: </b>" + marker.myJsonData.Status)
+					.openOn(map);
+		}
+				
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map); 
+                    
+	}
+	
+	function for_disp(jsonData, trHTML)
+	{
+		
+		trHTML += '<tr style="color:white;"><td>' + jsonData.OderID + 
+									  '</td><td>' + jsonData.Item + 
+									  '</td><td>' + jsonData.Priority + 
+									  '</td><td>' + jsonData.City + 
+									  '</td><td>' + jsonData.Dispatched +
+									  '</td><td>' + jsonData.Shipped +
+									  '</td><td>' + jsonData.Order +
+									  '</td><td>' + jsonData.Dispatch +
+									  '</td><td>' + jsonData.Shipping +
+									  '</td><td>' + jsonData.TimeTaken +
+									  '</td></tr>';
+
+		console.log(trHTML);
+		$('#details').html(trHTML);
+		trHTML = '';
+	}
+	
+	function work()
+	{
+		
+		var container = L.DomUtil.get('map');
+
+      	if(container != null)
+		{
+			container._leaflet_id = null;
+        }
+         
+        var map = L.map('map').setView([22.5937, 82.9629], 4);
+		
+		var trHTML = '';
+		
+		//Getting JSON data and extracting it
+		$.getJSON('https://spreadsheets.google.com/feeds/list/1nRNxgdfchYMmsk5CRWt6EG8lV5G71RCI4EevfIHJbxU/5/public/full?alt=json', function (data){
+			for (var i = 0; i < data.feed.entry.length; ++i) 
+			{
+				var status, count = 0;
+				
+				if(data.feed.entry[i].gsx$orderdispatched.$t == 'No')
+					{
+						status = "Not Dispatched";
+					}
+				else if(data.feed.entry[i].gsx$orderdispatched.$t == 'Yes' && data.feed.entry[i].gsx$ordershipped.$t == 'No')
+					{
+						status = "Dispatched";
+					}
+				else if(data.feed.entry[i].gsx$ordershipped.$t == 'Yes')
+					{
+						status = "Shipped";
+					}
+				
+				var json_data = {
+					"City": data.feed.entry[i].gsx$city.$t,
+					"OderID" : data.feed.entry[i].gsx$orderid.$t,
+					"Item" : data.feed.entry[i].gsx$item.$t,
+					"Latitude": parseFloat(data.feed.entry[i].gsx$latitude.$t),
+					"Longitude": parseFloat(data.feed.entry[i].gsx$longitude.$t),
+					"Order": data.feed.entry[i].gsx$ordertime.$t,
+					"Dispatch": data.feed.entry[i].gsx$dispatchtime.$t,
+					"Shipping": data.feed.entry[i].gsx$shippingtime.$t,
+					"TimeTaken": parseFloat(data.feed.entry[i].gsx$timetaken.$t),
+					"Priority": data.feed.entry[i].gsx$priority.$t,
+					"Quantity": data.feed.entry[i].gsx$quantity.$t,
+					"Dispatched": data.feed.entry[i].gsx$orderdispatched.$t,
+					"Shipped": data.feed.entry[i].gsx$ordershipped.$t,
+					"Status": status
+					};
+				
+				if (data.feed.entry[i].gsx$orderid.$t == input)
+				{
+					for_map(container, map, json_data);
+					for_disp(json_data, trHTML);
+					count++;
+					break;
+				}
+				
+            };
+			if (count == 0)
+			{
+				document.getElementById('message').innerHTML = '*******Order ID: ' + input + ' not found*******';
+			}
+		});
+	}
+	
+	//Function for Current Time
+	function time()
+	{
+		var dt = new Date();
+		document.getElementById('date-time').innerHTML = dt;
+	}
+	
+	//Function to store search bar input and pass it to next page
+	function search_input() 
+	{
+		var b = document.getElementById('OrderID').value,
+			url = 'search.html?OrderID=' + encodeURIComponent(b);
+
+		document.location.href = url;
+	}
+</script>
+</html>

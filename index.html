@@ -103,13 +103,13 @@
 				
 				<!-- seach bar right align -->
 				<div class="search"> 
-					<form action="#"> 
-						<input type="text" placeholder=" Search Order ID" name="search"> 
-						<button> 
-							<i class="fa fa-search"
-								style="font-size: 18px;"> 
-							</i> 
-						</button> 
+					<form method="get" action="search.html"> 
+						<input type="text" placeholder=" Search Order ID" name="OrderID" id="OrderID"> 
+							<button type="button" onClick="search_input()"> 
+								<i class="fa fa-search"
+									style="font-size: 18px;"> 
+								</i> 
+							</button> 
 					</form> 
 				</div> 
 			 
@@ -268,6 +268,7 @@
 		 shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
 		 iconSize: [25, 41],
 		 iconAnchor: [12, 41],
+		 popupAnchor: [1, -34],
 		 shadowSize: [41, 41]
 	});
 
@@ -277,6 +278,7 @@
 		 shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
 		 iconSize: [25, 41],
 		 iconAnchor: [12, 41],
+		 popupAnchor: [1, -34],
 		 shadowSize: [41, 41]
 	});
 
@@ -286,6 +288,7 @@
 		 shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
 		 iconSize: [25, 41],
 		 iconAnchor: [12, 41],
+		 popupAnchor: [1, -34],
 		 popupAnchor: [1, -34],
 		 shadowSize: [41, 41]
 	});
@@ -411,13 +414,13 @@
 	}
 	
 	
-	
 	function work()
 	{
 		var container = L.DomUtil.get('map');
 
-      	if(container != null){
-        container._leaflet_id = null;
+      	if(container != null)
+		{
+			container._leaflet_id = null;
         }
          
         var map = L.map('map').setView([20.5937, 78.9629], 4);
@@ -479,7 +482,16 @@
 	function time()
 	{
 		var dt = new Date();
-		document.getElementById('date-time').innerHTML=dt;
+		document.getElementById('date-time').innerHTML = dt;
+	}
+	
+	//Function to store search bar input and pass it to next page
+	function search_input() 
+	{
+		var b = document.getElementById('OrderID').value,
+			url = 'search.html?OrderID=' + encodeURIComponent(b);
+
+		document.location.href = url;
 	}
 </script>
 </html>

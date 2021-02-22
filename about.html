@@ -103,13 +103,13 @@
 				
 				<!-- seach bar right align -->
 				<div class="search"> 
-					<form action="#"> 
-						<input type="text" placeholder=" Search Order ID" name="search"> 
-						<button> 
-							<i class="fa fa-search"
-								style="font-size: 18px;"> 
-							</i> 
-						</button> 
+					<form method="get" action="search.html"> 
+						<input type="text" placeholder=" Search Order ID" name="OrderID" id="OrderID"> 
+							<button type="button" onClick="search_input()"> 
+								<i class="fa fa-search"
+									style="font-size: 18px;"> 
+								</i> 
+							</button> 
 					</form> 
 				</div> 
 			 
@@ -158,7 +158,16 @@
 	function time()
 	{
 		var dt = new Date();
-		document.getElementById('date-time').innerHTML=dt;
+		document.getElementById('date-time').innerHTML = dt;
+	}
+	
+	//Function to store search bar input and pass it to next page
+	function search_input() 
+	{
+		var b = document.getElementById('OrderID').value,
+			url = 'search.html?OrderID=' + encodeURIComponent(b);
+
+		document.location.href = url;
 	}
 </script>
 </html>

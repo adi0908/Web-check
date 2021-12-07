@@ -317,7 +317,7 @@
           		}
 				
 				//Placing marker on map
-                var marker = L.marker(L.latLng(jsonDataObject[j].Latitude,jsonDataObject[j].Longitude),{icon : presentIcon});
+                var marker = L.marker(L.latLng(parseFloat(jsonDataObject[j].Latitude),parseFloat(jsonDataObject[j].Longitude)),{icon : presentIcon});
                 marker.bindPopup(jsonDataObject[j].City, {
                         autoClose: false
                 });

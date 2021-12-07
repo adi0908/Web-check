@@ -232,7 +232,7 @@
 		var trHTML = '';
 		
 		//Getting JSON data and extracting it
-		$.getJSON('https://spreadsheets.google.com/feeds/list/1rDkw7KAmARn-Wa3ApkWaJp1pVUW-97nunSBL4FXhbeY/2/public/full?alt=json', function (data){
+		$.getJSON('https://sheets.googleapis.com/v4/spreadsheets/1rDkw7KAmARn-Wa3ApkWaJp1pVUW-97nunSBL4FXhbeY/values/Inventory?alt=json&key=AIzaSyDkh8NIboqE_KjzyN2R4Kr95v7-5ZfGN0U', function (data){
 			for (var i = 0; i < data.feed.entry.length; ++i) 
 			{
 				var quantity = 0, item = "";

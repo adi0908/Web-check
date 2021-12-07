@@ -226,24 +226,24 @@
 		
 		//Getting JSON data and extracting it
 		$.getJSON('Inventory.json', function (data){
-			for (var i = 0; i < data.feed.entry.length; ++i) 
+			for (var i = 0; i < data.length; ++i) 
 			{
 				var quantity = 0, item = "";
-				item = data.feed.entry[i].gsx$item.$t;
-				for (var j = 0; j < data.feed.entry.length; ++j)
+				item = data[i].gsx$item.$t;
+				for (var j = 0; j < data.length; ++j)
 				{
-					if( item === data.feed.entry[j].gsx$item.$t)
+					if( item === data[j].gsx$item.$t)
 					{
 						quantity++;
 					}
 				}
 				
 				var json_data = {
-					"UID" : data.feed.entry[i].gsx$uniqueid.$t,
+					"UID" : data[i].gsx$uniqueid.$t,
 					"Item" : item,
-					"Priority": data.feed.entry[i].gsx$priority.$t,
+					"Priority": data[i].gsx$priority.$t,
 					"Quantity": quantity,
-					"Cost": data.feed.entry[i].gsx$cost.$t,
+					"Cost": data[i].gsx$cost.$t,
 				};
 				
 				jsonDataObject.push(json_data);

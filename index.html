@@ -433,7 +433,7 @@
 		var trHTML = '';
 		
 		//Getting JSON data and extracting it
-		$.getJSON('https://docs.google.com/spreadsheets/d/1rDkw7KAmARn-Wa3ApkWaJp1pVUW-97nunSBL4FXhbeY/1/gviz/tq?tqx=out:json', function (data){
+		$.getJSON('https://spreadsheets.google.com/feeds/list/1rDkw7KAmARn-Wa3ApkWaJp1pVUW-97nunSBL4FXhbeY/1/od6/public/values?alt=json', function (data){
 			for (var i = 0; i < data.feed.entry.length; ++i) 
 			{
 				var status;

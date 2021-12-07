@@ -229,21 +229,21 @@
 			for (var i = 0; i < data.length; ++i) 
 			{
 				var quantity = 0, item = "";
-				item = data[i].gsx$item.$t;
+				item = data[i].gsx$item;
 				for (var j = 0; j < data.length; ++j)
 				{
-					if( item === data[j].gsx$item.$t)
+					if( item === data[j].gsx$item)
 					{
 						quantity++;
 					}
 				}
 				
 				var json_data = {
-					"UID" : data[i].gsx$uniqueid.$t,
+					"UID" : data[i].gsx$uniqueid,
 					"Item" : item,
-					"Priority": data[i].gsx$priority.$t,
+					"Priority": data[i].gsx$priority,
 					"Quantity": quantity,
-					"Cost": data[i].gsx$cost.$t,
+					"Cost": data[i].gsx$cost,
 				};
 				
 				jsonDataObject.push(json_data);

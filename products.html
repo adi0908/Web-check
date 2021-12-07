@@ -232,25 +232,25 @@
 		var trHTML = '';
 		
 		//Getting JSON data and extracting it
-		$.getJSON("Inventory.json", function (data){
-			for (var i = 0; i < data.feed.entry.length; ++i) 
+		$.getJSON('Inventory.json', function (data){
+			for (var i = 0; i < data.feed.length; ++i) 
 			{
 				var quantity = 0, item = "";
 				item = data.feed.entry[i].gsx$item.$t;
 				for (var j = 0; j < data.feed.entry.length; ++j)
 				{
-					if( item === data.feed.entry[j].gsx$item.$t)
+					if( item === dataitem[j])
 					{
 						quantity++;
 					}
 				}
 				
 				var json_data = {
-					"UID" : data.feed.entry[i].gsx$uniqueid.$t,
+					"UID" : data.uniqueid[i],
 					"Item" : item,
-					"Priority": data.feed.entry[i].gsx$priority.$t,
+					"Priority": data.priority[i],
 					"Quantity": quantity,
-					"Cost": data.feed.entry[i].gsx$cost.$t,
+					"Cost": data.cost[i],
 				};
 				
 				jsonDataObject.push(json_data);

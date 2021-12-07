@@ -229,13 +229,13 @@
 	{
 		var jsonDataObject = [];
 		
-		var trHTML = '';
+		var trHTML = '', quantity = 0;
 		
 		//Getting JSON data and extracting it
 		$.getJSON('Inventory.json', function (data){
 			for (var i = 0; i < 80; ++i) 
 			{
-				var quantity = 0, item = "";
+				var item = "";
 				item = data.item[i];
 				for (var j = 0; j < 80; ++j)
 				{

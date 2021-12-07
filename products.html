@@ -101,13 +101,6 @@
 				</a>
 				</div>
 				
-				<div class="navlist-centered">
-				<!-- eyantra logo -->
-				<a href="index.html">
-					<img src="sample1.jpg" alt="e_yantra_logo" width="290" height="60" >
-				</a>
-				</div>
-				
 				<!-- seach bar right align -->
 				<div class="search"> 
 					<form method="get" action="search.html"> 
@@ -124,7 +117,7 @@
 		<br><br><br><br><br>
 		<center>
 		<!-- Setting Heading -->
-			<h1 style="color:mustard;">Warehouse Dashboard</h1>
+			<h1 style="color:mustard;">VB#0853 Warehouse Dashboard</h1>
 		</center>
 		<!-- Setting Current TIme -->
 		<p style="float:right; font-family: Goldman;"><b>Time Now: </b><span id='date-time'></span> &nbsp </p>
@@ -132,7 +125,7 @@
 </header>
 
 <!-- Background Image -->
-<<body background = 'wp2406516.jpg' style="background-position: right; background-size: cover;">
+<body background = 'wp2406516.jpg' style="background-position: right; background-size: cover;">
 		
 		<!-- Setting Table Heading -->
 		<h2 style="color: #c9ba78; font-family: 'Goldman', sans-serif; font-size: 60px; margin-left:80px;">
@@ -229,28 +222,28 @@
 	{
 		var jsonDataObject = [];
 		
-		var trHTML = '', quantity = 0;
+		var trHTML = '';
 		
 		//Getting JSON data and extracting it
-		$.getJSON('Inventory.json',function (data){
-			for (var i = 0; i < 80; ++i) 
+		$.getJSON('Inventory.json', function (data){
+			for (var i = 0; i < data.feed.entry.length; ++i) 
 			{
-				var item = "";
-				item = data.item[i];
-				for (var j = 0; j < 80; ++j)
+				var quantity = 0, item = "";
+				item = data.feed.entry[i].gsx$item.$t;
+				for (var j = 0; j < data.feed.entry.length; ++j)
 				{
-					if( item === data.item[j])
+					if( item === data.feed.entry[j].gsx$item.$t)
 					{
 						quantity++;
 					}
 				}
 				
 				var json_data = {
-					"UID" : data.uniqueid[i],
+					"UID" : data.feed.entry[i].gsx$uniqueid.$t,
 					"Item" : item,
-					"Priority": data.priority[i],
+					"Priority": data.feed.entry[i].gsx$priority.$t,
 					"Quantity": quantity,
-					"Cost": data.cost[i],
+					"Cost": data.feed.entry[i].gsx$cost.$t,
 				};
 				
 				jsonDataObject.push(json_data);

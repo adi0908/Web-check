@@ -433,38 +433,38 @@
 		var trHTML = '';
 		
 		//Getting JSON data and extracting it
-		$.getJSON('https://sheets.googleapis.com/v4/spreadsheets/1rDkw7KAmARn-Wa3ApkWaJp1pVUW-97nunSBL4FXhbeY/values/Dashboard?alt=json', function (data){
-			for (var i = 0; i < data.feed.entry.length; ++i) 
+		$.getJSON('Dashboard.json', function (data){
+			for (var i = 0; i < data.length; ++i) 
 			{
 				var status;
 				
-				if(data.feed.entry[i].gsx$orderdispatched.$t == 'No')
+				if(data[i].gsx$orderdispatched == 'No')
 					{
 						status = "Not Dispatched";
 					}
-				else if(data.feed.entry[i].gsx$orderdispatched.$t == 'Yes' && data.feed.entry[i].gsx$ordershipped.$t == 'No')
+				else if(data[i].gsx$orderdispatched == 'Yes' && data[i].gsx$ordershipped == 'No')
 					{
 						status = "Dispatched";
 					}
-				else if(data.feed.entry[i].gsx$ordershipped.$t == 'Yes')
+				else if(data[i].gsx$ordershipped == 'Yes')
 					{
 						status = "Shipped";
 					}
 				
 				var json_data = {
-					"City": data.feed.entry[i].gsx$city.$t,
-					"OderID" : data.feed.entry[i].gsx$orderid.$t,
-					"Item" : data.feed.entry[i].gsx$item.$t,
-					"Latitude": parseFloat(data.feed.entry[i].gsx$latitude.$t),
-					"Longitude": parseFloat(data.feed.entry[i].gsx$longitude.$t),
-					"Order": data.feed.entry[i].gsx$ordertime.$t,
-					"Dispatch": data.feed.entry[i].gsx$dispatchtime.$t,
-					"Shipping": data.feed.entry[i].gsx$shippingtime.$t,
-					"TimeTaken": parseFloat(data.feed.entry[i].gsx$timetaken.$t),
-					"Priority": data.feed.entry[i].gsx$priority.$t,
-					"Quantity": data.feed.entry[i].gsx$quantity.$t,
-					"Dispatched": data.feed.entry[i].gsx$orderdispatched.$t,
-					"Shipped": data.feed.entry[i].gsx$ordershipped.$t,
+					"City": data[i].gsx$city,
+					"OderID" : data[i].gsx$orderid,
+					"Item" : data[i].gsx$item,
+					"Latitude": parseFloat(data[i].gsx$latitude),
+					"Longitude": parseFloat(data[i].gsx$longitude),
+					"Order": data[i].gsx$ordertime,
+					"Dispatch": data[i].gsx$dispatchtime,
+					"Shipping": data[i].gsx$shippingtime,
+					"TimeTaken": parseFloat(data[i].gsx$timetaken),
+					"Priority": data[i].gsx$priority,
+					"Quantity": data[i].gsx$quantity,
+					"Dispatched": data[i].gsx$orderdispatched,
+					"Shipped": data[i].gsx$ordershipped,
 					"Status": status
 					};
 				
